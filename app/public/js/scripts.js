@@ -17,7 +17,7 @@ function appendQuestions () {
 var questions = appendQuestions()
 
 for (var i = 0; i < questions.length; i++) {
-//  $( '#questionDiv' ).append( '<h3>Question ' + ( i + 1 ) + '</h3>' + '<p>' + questions[ i ] + '</p>' + '<select class="chosen-select dropList" id="q' + i + '">' + '<option value=""></option>' + '<option value="1">1 (Strongly Disagree)</option>' + '<option value="2">2</option>' + '<option value="3">3</option>' + '<option value="4">4</option>' + '<option value="5">5 (Strongly Agree)</option>' + '</select>' )
+
   var dlist = document.createElement('div')
   dlist.innerHTML = ('<h3>Question ' + (i + 1) + '</h3>' + '<p>' + questions[ i ] + '</p>' + '<select class="chosen-select dropList" id="q' + i + '">' + '<option value=""></option>' + '<option value="1">1 (Strongly Disagree)</option>' + '<option value="2">2</option>' + '<option value="3">3</option>' + '<option value="4">4</option>' + '<option value="5">5 (Strongly Agree)</option>' + '</select>')
   questionDiv.appendChild(dlist)
@@ -42,12 +42,6 @@ var config = {
     width: '95%'
   }
 }
-
-for (var selector in config) {
-  $(selector).chosen(config[ selector ])
-}
-// User clicks the submit button
-// $( '#submitButton' ).on( 'click', function ( event ) {
 
 document.getElementById('submitButton').addEventListener('click', function (event) {
   // Don't reload the page
@@ -87,11 +81,16 @@ document.getElementById('submitButton').addEventListener('click', function (even
 
       document.getElementById('friendName').innerHTML = ('<h2>' + data.name + '</h2>')
       document.getElementById('friendImg').setAttribute('src', data.photo)
-      // Show the match modal
+      // Show the match modal only can be done in JQuery here
       $('#matchModal').modal('toggle')
     })
   // Clear the form when submitting
   document.getElementById('name').value = ''
   document.getElementById('image').value = ''
+
+  let _inputs = document.querySelectorAll("chosen-select");
+    for (let element of _inputs) {
+      element.value = "";
+    }
 })
 /* eslint-enable no-undef */
